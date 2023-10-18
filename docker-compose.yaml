@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  tomcat:
+    image: tomcat:latest
+    container_name: tomcat_app
+    ports:
+      - "8888:8080"
+    volumes:
+      - ./target/bank_mangement_JEE-1.0-SNAPSHOT:/usr/local/tomcat/webapps/easybank
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: credit_simulation
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: kamalbank123
