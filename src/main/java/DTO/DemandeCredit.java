@@ -4,12 +4,10 @@ import lombok.*;
 import Enum.EtatCredit;
 
 import java.time.LocalDate;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-
 @Entity
 @Table(name = "demandecredit")
 public class DemandeCredit {
