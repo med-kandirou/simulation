@@ -1,6 +1,6 @@
 package DTO;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -9,13 +9,13 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Entity
+@NoArgsConstructor
 @Table(name = "client")
 public class Client extends Personne{
-
     @Id
     @NonNull private String code;
 
-    @Column(name = "adresse", nullable = false)
     @NonNull private String adresse;
 
     public Client(String code,String firstName, String lastName, LocalDate birthday,String phone,String adresse){
