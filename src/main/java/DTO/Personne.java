@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
+
 public abstract class Personne {
 
     @NonNull protected String firstName;
