@@ -7,9 +7,9 @@ public class Database {
         private static Connection db;
         static {
             try {
-                String Url = "jdbc:postgresql://localhost:5432/bank_jee";
+                String Url = "jdbc:postgresql://localhost:5433/credit_simulation";
                 String Username = "postgres";
-                String Password = "simokandirou1234@";
+                String Password = "kamal123";
                 Class.forName("org.postgresql.Driver");
                 db=DriverManager.getConnection(Url, Username, Password);
             } catch (Exception e) {

@@ -8,6 +8,7 @@ function calcule(){
     document.getElementById('confirmPrix').style.display='block';
 }
 
+
 //change divs
 let simulate=document.getElementById('simulate');
 let search=document.getElementById('search');
