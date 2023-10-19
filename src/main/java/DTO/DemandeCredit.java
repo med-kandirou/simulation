@@ -12,10 +12,11 @@ import java.time.LocalDate;
 @Table(name = "demandecredit")
 public class DemandeCredit {
      @Id
-     private int numero;
-     private EtatCredit etat;
-     private Simulation simulation;
-     @NonNull private String remarques;
+     private int number;
+     @NonNull private EtatCredit etat;
+     @NonNull private Simulation simulation;
+     @NonNull private String remarks;
+     @NonNull private int duree;
      private LocalDate date;
-     private Client client;
+     @NonNull private Client client;
 }
