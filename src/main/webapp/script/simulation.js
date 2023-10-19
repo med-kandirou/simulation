@@ -1,3 +1,4 @@
+//calcule prix
 function calcule(){
     let tauxMensuel = (7 / 12) / 100;
     let montant= document.getElementById('montant').value;
@@ -7,7 +8,7 @@ function calcule(){
     document.getElementById('confirmPrix').style.display='block';
 }
 
-
+//change divs
 let simulate=document.getElementById('simulate');
 let search=document.getElementById('search');
 let info=document.getElementById('info');
