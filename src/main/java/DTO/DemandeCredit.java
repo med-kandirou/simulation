@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "demandecredit")
 public class DemandeCredit {
-
      @Id
      private int numero;
      private EtatCredit etat;
