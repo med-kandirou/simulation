@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class DemandeCredit {
      @Id
      private int number;
-     @NonNull private EtatCredit etat;
+     private EtatCredit etat;
      @NonNull private Simulation simulation;
      @NonNull private String remarks;
      @NonNull private int duree;
