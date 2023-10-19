@@ -15,7 +15,6 @@ import java.time.LocalDate;
 public class Client extends Personne{
     @Id
     @NonNull private String code;
-
     @NonNull private String adresse;
 
     public Client(String code,String firstName, String lastName, LocalDate birthday,String phone,String adresse){
