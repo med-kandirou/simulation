@@ -4,6 +4,10 @@ function calcule(){
     let montant= document.getElementById('montant').value;
     let dure= document.getElementById('dure').value;
     let mensualite = (montant * tauxMensuel) / (1 - Math.pow(1 + tauxMensuel, -dure));
+    localStorage.setItem('taux', tauxMensuel);
+    localStorage.setItem('montant', montant);
+    localStorage.setItem('dure', dure);
+    localStorage.setItem('mensualite', mensualite);
     document.getElementById('mensualite').value=mensualite.toFixed(2);
     document.getElementById('confirmPrix').style.display='block';
 }
@@ -40,7 +44,6 @@ document.getElementById('info_tab').addEventListener("click",function (){
 
 $(document).ready(function () {
     $("#searchButton").on("click", function () {
-
         simulate.style.display='none';
         search.style.display='none';
         info.style.display='block';
@@ -66,7 +69,31 @@ $(document).ready(function () {
                 window.location.href = "/client-create";
             }
         });
+    });
 
-
+    $("#confimDemande").on('click',function (){
+        $.ajax({
+            url: "/demande-create",
+            type: "POST",
+            data: {
+                code : $("#code").val(),
+                fname : $("#fname").val(),
+                lname : $("#lname").val(),
+                birthday : $("#birthday").val(),
+                adresse : $("#adresse").val(),
+                phone : $("#phone").val(),
+                taux:localStorage.getItem('taux'),
+                montant:localStorage.getItem('montant'),
+                dure:localStorage.getItem('dure'),
+                mensualite:localStorage.getItem('mensualite')
+            },
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (error) {
+                //window.location.href = "/client-create";
+                console.log(error);
+            }
+        });
     });
 });
