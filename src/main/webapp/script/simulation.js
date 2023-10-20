@@ -15,7 +15,6 @@ let search=document.getElementById('search');
 let info=document.getElementById('info');
 
 function confirmprix(){
-
     simulate.style.display='none';
     search.style.display='block';
     info.style.display='none';
@@ -52,12 +51,16 @@ $(document).ready(function () {
             type: "GET",
             data: { find : clienId },
 
-            success: function (data) {
-                $("#fname").val(data.firstName);
-                $("#lname").val(data.lastName);
-                $("#birthday").val(data.birthday);
-                $("#adresse").val(data.adresse);
-                $("#phone").val(data.phone);
+            success: function (data) {;
+                if (data && data.firstName) {
+                    $("#fname").val(data.firstName);
+                    $("#lname").val(data.lastName)
+                    $("#birthday").val(data.birthday);
+                    $("#adresse").val(data.adresse);
+                    $("#phone").val(data.phone);
+                } else {
+                    window.location.href = "/client-create";
+                }
              },
             error: function (error) {
                 window.location.href = "/client-create";

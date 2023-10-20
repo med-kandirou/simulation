@@ -59,12 +59,17 @@ public class ClientServlet extends HttpServlet {
                 request.getRequestDispatcher("/ClientPages/display.jsp").forward(request, response);
                 break;
             case "/client-search-simulation" :
+                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
                 String find = request.getParameter("find");
                 Optional<Client> client = service.getClientbyId(find);
                 if (client.isPresent()) {
                     // Gson gson = new Gson();
-                    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
                     String clientJson = gson.toJson(client.get());
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(clientJson);
+                }else{
+                    String clientJson = gson.toJson(client.isEmpty());
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
                     response.getWriter().write(clientJson);

@@ -19,16 +19,9 @@ public class ImpDemandeCredit implements IdemandeCredit {
    private Session session;
    private Transaction transaction;
 
-
-   final SessionFactory sessionFactory = SessionFactoryProvider.provideSessionFactory();
-   final Session session = sessionFactory.openSession();
-   final Transaction transaction = session.beginTransaction();
-
-
    public ImpDemandeCredit(){
        this.sessionFactory = SessionFactoryProvider.provideSessionFactory();
        this.session = sessionFactory.openSession();
-
    }
 
     @Override
