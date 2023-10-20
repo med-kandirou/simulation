@@ -1,24 +1,27 @@
 package com.example.bank_mangement_jee;
 
+import Config.LocalDateAdapter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import DAO.ImpClient;
 import DTO.Client;
 import Services.ClientService;
+import com.google.gson.GsonBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.transaction.Transaction;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import com.google.gson.Gson;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Optional;
 
-@WebServlet(name ="CLientServlet", urlPatterns = {"/client-create", "/client-update","/client-display","/client-search","/client-delete"})
+@WebServlet(name ="CLientServlet", urlPatterns = {"/client-create", "/client-update","/client-display","/client-search", "/client-search-simulation", "/client-delete"})
 public class ClientServlet extends HttpServlet {
     String code;
     String fname;
@@ -54,6 +57,18 @@ public class ClientServlet extends HttpServlet {
                 String param = request.getParameter("param");
                 request.setAttribute("clients",service.search(param));
                 request.getRequestDispatcher("/ClientPages/display.jsp").forward(request, response);
+                break;
+            case "/client-search-simulation" :
+                String find = request.getParameter("find");
+                Optional<Client> client = service.getClientbyId(find);
+                if (client.isPresent()) {
+                    // Gson gson = new Gson();
+                    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+                    String clientJson = gson.toJson(client.get());
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(clientJson);
+                }
                 break;
             case "/client-delete" :
                 service.delete(request.getParameter("id"));

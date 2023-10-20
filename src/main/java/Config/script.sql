@@ -28,6 +28,7 @@ CREATE TABLE demandecredit (
                                Client_code varchar(50),
                                FOREIGN KEY (Client_code) REFERENCES client(code)
 );
+
 CREATE TABLE agence (
                         code serial primary key,
                         name VARCHAR(255),

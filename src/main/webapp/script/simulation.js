@@ -15,6 +15,7 @@ let search=document.getElementById('search');
 let info=document.getElementById('info');
 
 function confirmprix(){
+
     simulate.style.display='none';
     search.style.display='block';
     info.style.display='none';
@@ -37,3 +38,32 @@ document.getElementById('info_tab').addEventListener("click",function (){
     search.style.display='none';
     info.style.display='block';
 })
+
+$(document).ready(function () {
+    $("#searchButton").on("click", function () {
+
+        simulate.style.display='none';
+        search.style.display='none';
+        info.style.display='block';
+
+        var clienId = $("#find").val();
+        $.ajax({
+            url: "/client-search-simulation",
+            type: "GET",
+            data: { find : clienId },
+
+            success: function (data) {
+                $("#fname").val(data.firstName);
+                $("#lname").val(data.lastName);
+                $("#birthday").val(data.birthday);
+                $("#adresse").val(data.adresse);
+                $("#phone").val(data.phone);
+             },
+            error: function (error) {
+                window.location.href = "/client-create";
+            }
+        });
+
+
+    });
+});
