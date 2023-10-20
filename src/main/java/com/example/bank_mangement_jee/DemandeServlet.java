@@ -18,17 +18,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 
-@WebServlet(name ="DemandeServlet", urlPatterns = {"/demande-create","/demande-display","/demande-search"})
+@WebServlet(name ="DemandeServlet", urlPatterns = {"/demande-create","/demande-display"})
 public class DemandeServlet extends HttpServlet {
-
     DemandeService service;
     String requestURL;
-
     private Simulation simulation;
     private String remarks;
     private int duree;
     private Client client;
-
 
     @Override
     public void init() throws ServletException {
