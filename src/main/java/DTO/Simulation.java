@@ -7,10 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Simulation {
-
-    @NonNull private double capitalEmprunte;
-    @NonNull private double tauxAnnuel;
-    @NonNull private int nombreMensualite;
-
-
+    @NonNull private double montant;
+    @NonNull private double taux;
+    @NonNull private int dure;
+    @NonNull private double mensualite;
 }

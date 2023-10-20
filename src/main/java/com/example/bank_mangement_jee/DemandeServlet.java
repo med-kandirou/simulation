@@ -22,10 +22,16 @@ import java.time.LocalDate;
 public class DemandeServlet extends HttpServlet {
     DemandeService service;
     String requestURL;
-    private Simulation simulation;
+    //demande
+    private Simulation s;
     private String remarks;
     private int duree;
     private Client client;
+    //simulation
+    private double taux;
+    private double montant;
+    private int dure;
+    private double mensualite;
 
     @Override
     public void init() throws ServletException {
@@ -42,7 +48,10 @@ public class DemandeServlet extends HttpServlet {
         this.requestURL=req.getServletPath();
         switch (this.requestURL){
             case "/demande-create":
-                DemandeCredit demandeCredit= new DemandeCredit();
+                s= new Simulation(montant,taux,dure,mensualite);
+                client= new Client();
+                client.setCode(req.getParameter("code"));
+                DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
                 service.add(demandeCredit);
                 break;
             default:

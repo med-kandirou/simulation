@@ -14,9 +14,12 @@ public class DemandeCredit {
      @Id
      private int number;
      private EtatCredit etat;
-     @NonNull private Simulation simulation;
+     @NonNull private double taux;
+     @NonNull private double montant;
+     @NonNull private double mensualite;
+     @NonNull private int dure;
      @NonNull private String remarks;
-     @NonNull private int duree;
      private LocalDate date;
+     @ManyToOne
      @NonNull private Client client;
 }
