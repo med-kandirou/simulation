@@ -1,17 +1,15 @@
 package DAO;
 
-import Config.Database;
 import Config.SessionFactoryProvider;
 import DTO.DemandeCredit;
 import Interfaces.IdemandeCredit;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
-import java.sql.Connection;
 import java.util.Optional;
 
 public class ImpDemandeCredit implements IdemandeCredit {
+
 
    final SessionFactory sessionFactory = SessionFactoryProvider.provideSessionFactory();
    final Session session = sessionFactory.openSession();
