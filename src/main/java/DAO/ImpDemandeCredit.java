@@ -6,14 +6,12 @@ import Interfaces.IdemandeCredit;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-<<<<<<< HEAD
-=======
+
 import org.hibernate.query.Query;
 
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
->>>>>>> 43521515c13de82ab965d4f166be0f5fe59e3d22
 import java.util.Optional;
 
 public class ImpDemandeCredit implements IdemandeCredit {
@@ -21,13 +19,11 @@ public class ImpDemandeCredit implements IdemandeCredit {
    private Session session;
    private Transaction transaction;
 
-<<<<<<< HEAD
 
    final SessionFactory sessionFactory = SessionFactoryProvider.provideSessionFactory();
    final Session session = sessionFactory.openSession();
    final Transaction transaction = session.beginTransaction();
-=======
->>>>>>> 43521515c13de82ab965d4f166be0f5fe59e3d22
+
 
    public ImpDemandeCredit(){
        this.sessionFactory = SessionFactoryProvider.provideSessionFactory();
