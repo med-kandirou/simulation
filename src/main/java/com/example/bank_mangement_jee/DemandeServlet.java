@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 
-@WebServlet(name ="DemandeServlet", urlPatterns = {"/demande-create","/demande-display","/simulation-display"})
+@WebServlet(name ="DemandeServlet", urlPatterns = {"/credit-display","/credit-display-etat","/credit-display-date","/demande-create","/demande-display","/simulation-display"})
 public class DemandeServlet extends HttpServlet {
     DemandeService service;
     String requestURL;
@@ -37,7 +37,7 @@ public class DemandeServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        //service= new DemandeService(new ImpDemandeCredit());
+        service= new DemandeService(new ImpDemandeCredit());
     }
 
     @Override
@@ -45,7 +45,7 @@ public class DemandeServlet extends HttpServlet {
         this.requestURL=req.getServletPath();
         switch (this.requestURL){
             case "/credit-display" :
-                req.setAttribute("credits",service.getAll());
+                //req.setAttribute("credits",service.getAll());
                 req.getRequestDispatcher("Credit/demande.jsp").forward(req, resp);
                 break;
             case "/credit-display-etat" :

@@ -27,7 +27,7 @@ public class ImpDemandeCredit implements IdemandeCredit {
     @Override
     public Optional<DemandeCredit> add(DemandeCredit demandeCredit) {
         try {
-            session.beginTransaction();
+            transaction=session.beginTransaction();
             session.save(demandeCredit);
             transaction.commit();
             return Optional.of(demandeCredit);
