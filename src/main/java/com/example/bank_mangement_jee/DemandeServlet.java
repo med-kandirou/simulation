@@ -56,14 +56,11 @@ public class DemandeServlet extends HttpServlet {
                 this.remarks= req.getParameter("remarks");
                 this.mensualite= Double.parseDouble(req.getParameter("mensualite"));
                 this.client= new Client();
-                String code=req.getParameter("code");
                 s= new Simulation(montant,taux,duree,mensualite);
                 client= new Client();
                 client.setCode(req.getParameter("code"));
-                System.out.printf(client.getCode());
-                System.out.printf(this.remarks);
-                /*DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
-                service.add(demandeCredit);*/
+                DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
+                service.add(demandeCredit);
                 break;
             default:
                 break;
