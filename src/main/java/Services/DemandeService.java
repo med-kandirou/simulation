@@ -29,7 +29,7 @@ public class DemandeService {
         return impdemande.getbyetat(etat);
     }
 
-    public List<DemandeCredit> gatAll(){
+    public List<DemandeCredit> getAll(){
         return impdemande.gatAll();
     }
 }

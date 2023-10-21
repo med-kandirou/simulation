@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 
-@WebServlet(name ="DemandeServlet", urlPatterns = {"/demande-create","/demande-display"})
+@WebServlet(name ="DemandeServlet", urlPatterns = {"/demande-create","/demande-display","/simulation-display"})
 public class DemandeServlet extends HttpServlet {
     DemandeService service;
     String requestURL;
@@ -42,7 +42,26 @@ public class DemandeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        this.requestURL=req.getServletPath();
+        switch (this.requestURL){
+            case "/credit-display" :
+                req.setAttribute("credits",service.getAll());
+                req.getRequestDispatcher("Credit/demande.jsp").forward(req, resp);
+                break;
+            case "/credit-display-etat" :
+                req.setAttribute("credits",service.getbyetat(req.getParameter("etat")));
+                req.getRequestDispatcher("Credit/demande.jsp").forward(req, resp);
+                break;
+            case "/credit-display-date" :
+                req.setAttribute("credits",service.getbydate(LocalDate.parse(req.getParameter("date"))));
+                req.getRequestDispatcher("Credit/demande.jsp").forward(req, resp);
+                break;
+            case "/simulation-display" :
+                req.getRequestDispatcher("Credit/simulation.jsp").forward(req, resp);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -66,7 +85,5 @@ public class DemandeServlet extends HttpServlet {
                 break;
         }
     }
-
-
 
 }

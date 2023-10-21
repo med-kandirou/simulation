@@ -6,7 +6,6 @@
     <title>Simulation</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
     <jsp:include page="../Component/header.jsp" />
-
 </head>
 <body>
 

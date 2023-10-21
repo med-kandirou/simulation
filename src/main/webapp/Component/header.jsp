@@ -18,11 +18,10 @@
         text-decoration: none;
         color: #000000;
         margin: 0 15px;
-        font-weight: bold;
     }
 
     .logo {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .nav-links {
@@ -51,7 +50,8 @@
         <li><a href="/client-create">Create client</a></li>
         <li><a href="/employe-display">Display employes</a></li>
         <li><a href="/employe-create">Create employe</a></li>
-        <li><a href="../ClientPages/simulation.jsp">Simulation</a></li>
+        <li><a href="/simulation-display">Simulation</a></li>
+        <li><a href="/credit-display">Demandes</a></li>
     </ul>
 </nav>
 
