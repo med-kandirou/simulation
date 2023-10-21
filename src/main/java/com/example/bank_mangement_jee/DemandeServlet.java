@@ -1,5 +1,6 @@
 package com.example.bank_mangement_jee;
 
+import Config.LocalDateAdapter;
 import DAO.ImpDemandeCredit;
 import DAO.ImpEmploye;
 import DTO.Client;
@@ -7,6 +8,8 @@ import DTO.DemandeCredit;
 import DTO.Simulation;
 import Services.DemandeService;
 import Services.EmployeService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,17 +28,16 @@ public class DemandeServlet extends HttpServlet {
     //demande
     private Simulation s;
     private String remarks;
-    private int duree;
     private Client client;
     //simulation
     private double taux;
     private double montant;
-    private int dure;
+    private int duree;
     private double mensualite;
 
     @Override
     public void init() throws ServletException {
-        service= new DemandeService(new ImpDemandeCredit());
+        //service= new DemandeService(new ImpDemandeCredit());
     }
 
     @Override
@@ -48,11 +50,20 @@ public class DemandeServlet extends HttpServlet {
         this.requestURL=req.getServletPath();
         switch (this.requestURL){
             case "/demande-create":
-                s= new Simulation(montant,taux,dure,mensualite);
+                this.taux= Double.parseDouble(req.getParameter("taux"));
+                this.montant= Double.parseDouble(req.getParameter("montant"));
+                this.duree= Integer.parseInt(req.getParameter("dure"));
+                this.remarks= req.getParameter("remarks");
+                this.mensualite= Double.parseDouble(req.getParameter("mensualite"));
+                this.client= new Client();
+                String code=req.getParameter("code");
+                s= new Simulation(montant,taux,duree,mensualite);
                 client= new Client();
                 client.setCode(req.getParameter("code"));
-                DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
-                service.add(demandeCredit);
+                System.out.printf(client.getCode());
+                System.out.printf(this.remarks);
+                /*DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
+                service.add(demandeCredit);*/
                 break;
             default:
                 break;
