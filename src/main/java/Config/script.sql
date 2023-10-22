@@ -40,3 +40,33 @@ CREATE TABLE agence (
 
 
 
+CREATE TABLE historique_modifications_demande (
+                       id SERIAL PRIMARY KEY,
+                       demande_id INT,
+                       ancien_statut VARCHAR(255),
+                       nouveau_statut VARCHAR(255),
+                       date_modification TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION enregistrer_historique_modification()
+RETURNS TRIGGER AS $$
+BEGIN
+
+INSERT INTO historique_modifications_demande (demande_id, ancien_statut, nouveau_statut)
+VALUES (OLD.number, OLD.etat, NEW.etat);
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+   CREATE TRIGGER historique_modification_trigger
+    AFTER UPDATE ON demandecredit
+    FOR EACH ROW
+    EXECUTE FUNCTION enregistrer_historique_modification();
+
