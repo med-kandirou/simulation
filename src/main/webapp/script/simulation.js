@@ -55,18 +55,6 @@ $(document).ready(function () {
             type: "GET",
             data: { find : clienId },
 
-<<<<<<< HEAD
-            success: function (data) {;
-                if (data && data.firstName) {
-                    $("#fname").val(data.firstName);
-                    $("#lname").val(data.lastName)
-                    $("#birthday").val(data.birthday);
-                    $("#adresse").val(data.adresse);
-                    $("#phone").val(data.phone);
-                } else {
-                    window.location.href = "/client-create";
-                }
-=======
             success: function (data) {
                 $("#code").val(data.code);
                 $("#fname").val(data.firstName);
@@ -74,8 +62,7 @@ $(document).ready(function () {
                 $("#birthday").val(data.birthday);
                 $("#adresse").val(data.adresse);
                 $("#phone").val(data.phone);
->>>>>>> 01d8c8037c2ede9d9ba5c09cf38e3f0f235c04bb
-             },
+            },
             error: function (error) {
                 window.location.href = "/client-create";
             }
@@ -115,7 +102,4 @@ $(document).ready(function () {
     $('#search_date').on('change',function (){
         window.location.href="/credit-display-date?date="+$('#search_date').val()+"";
     })
-
-
-
 });
