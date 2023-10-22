@@ -19,9 +19,10 @@ import lombok.NonNull;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 
-@WebServlet(name ="DemandeServlet", urlPatterns = {"/credit-display","/credit-display-etat","/credit-display-date","/demande-create","/demande-display","/simulation-display"})
+@WebServlet(name ="DemandeServlet", urlPatterns = {"/credit-display","/credit-display-etat","/credit-display-date","/demande-create","/demande-display","/simulation-display", "/change-status-demande"})
 public class DemandeServlet extends HttpServlet {
     DemandeService service;
     String requestURL;
@@ -80,6 +81,17 @@ public class DemandeServlet extends HttpServlet {
                 client.setCode(req.getParameter("code"));
                 DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
                 service.add(demandeCredit);
+                break;
+            case "/change-status-demande":
+                int demandeNum = Integer.parseInt(req.getParameter("demandeNum"));
+                String newStatus = req.getParameter("newStatus");
+                Optional<DemandeCredit> updatedDemandeCredit = service.updateStatus(demandeNum, newStatus);
+
+                if (updatedDemandeCredit.isPresent()) {
+                    resp.sendRedirect("/credit-display");
+                } else {
+                    resp.sendRedirect("/credit-display");
+                }
                 break;
             default:
                 break;

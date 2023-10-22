@@ -102,4 +102,7 @@ $(document).ready(function () {
     $('#search_date').on('change',function (){
         window.location.href="/credit-display-date?date="+$('#search_date').val()+"";
     })
+
+
+
 });

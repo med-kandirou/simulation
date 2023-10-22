@@ -9,11 +9,9 @@ import org.hibernate.Transaction;
 
 import org.hibernate.query.Query;
 
-import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import Enum.EtatCredit;
 
 public class ImpDemandeCredit implements IdemandeCredit {
    private SessionFactory sessionFactory;
@@ -35,6 +33,11 @@ public class ImpDemandeCredit implements IdemandeCredit {
         } catch (Exception e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public Optional<DemandeCredit> update(DemandeCredit demandeCredit) {
+        return Optional.empty();
     }
 
     public List<DemandeCredit> getbydate(LocalDate date) {
@@ -59,9 +62,29 @@ public class ImpDemandeCredit implements IdemandeCredit {
     }
 
     @Override
-    public Optional<DemandeCredit> update(DemandeCredit demandeCredit) {
-        return Optional.empty();
+    public Optional<DemandeCredit> updateStatus(int demandeNum, String newStatus) {
+        try {
+            transaction = session.beginTransaction();
+            DemandeCredit demandeCredit = session.get(DemandeCredit.class, demandeNum);
+            if (demandeCredit != null) {
+                demandeCredit.setEtat(newStatus);
+                session.update(demandeCredit);
+                transaction.commit();
+                return Optional.of(demandeCredit);
+            } else {
+                return Optional.empty();
+            }
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
+
+
+
+
+
+
+
     @Override
     public boolean delete(Integer id) {
 

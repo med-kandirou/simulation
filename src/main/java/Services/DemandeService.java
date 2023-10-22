@@ -42,4 +42,9 @@ public class DemandeService {
     public List<DemandeCredit> getAll(){
         return impdemande.gatAll();
     }
+
+    public Optional<DemandeCredit> updateStatus(int demandeNum, String newStatus){
+        return impdemande.updateStatus(demandeNum,newStatus );
+    }
+
 }
