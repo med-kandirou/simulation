@@ -13,7 +13,6 @@ public class Simulation {
     @NonNull private double taux;
     @NonNull private int dure;
     private double mensualite;
-
     //validation au niveau de backend
     public void setMensualite() {
         this.taux=5.5;
