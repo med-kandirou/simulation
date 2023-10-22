@@ -1,10 +1,11 @@
 //calcule prix
 function calcule(){
-    let tauxMensuel = (7 / 12) / 100;
-    let montant= document.getElementById('montant').value;
-    let dure= document.getElementById('dure').value;
+    let taux = 5.5;
+    let montant = document.getElementById('montant').value;
+    let dure = document.getElementById('dure').value;
+    let tauxMensuel = taux / (12 * 100);
     let mensualite = (montant * tauxMensuel) / (1 - Math.pow(1 + tauxMensuel, -dure));
-    localStorage.setItem('taux', tauxMensuel);
+    localStorage.setItem('taux', taux);
     localStorage.setItem('montant', montant);
     localStorage.setItem('dure', dure);
     localStorage.setItem('mensualite', mensualite);
@@ -54,6 +55,7 @@ $(document).ready(function () {
             type: "GET",
             data: { find : clienId },
 
+<<<<<<< HEAD
             success: function (data) {;
                 if (data && data.firstName) {
                     $("#fname").val(data.firstName);
@@ -64,6 +66,15 @@ $(document).ready(function () {
                 } else {
                     window.location.href = "/client-create";
                 }
+=======
+            success: function (data) {
+                $("#code").val(data.code);
+                $("#fname").val(data.firstName);
+                $("#lname").val(data.lastName);
+                $("#birthday").val(data.birthday);
+                $("#adresse").val(data.adresse);
+                $("#phone").val(data.phone);
+>>>>>>> 01d8c8037c2ede9d9ba5c09cf38e3f0f235c04bb
              },
             error: function (error) {
                 window.location.href = "/client-create";
@@ -89,7 +100,9 @@ $(document).ready(function () {
                 mensualite:localStorage.getItem('mensualite')
             },
             success: function (data) {
-                console.log(data);
+                if(data=='added'){
+                    window.location.href = "/simulation-display";
+                }
             },
             error: function (error) {
                 //window.location.href = "/client-create";

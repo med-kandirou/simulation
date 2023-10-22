@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -76,11 +77,21 @@ public class DemandeServlet extends HttpServlet {
                 this.remarks= req.getParameter("remarks");
                 this.mensualite= Double.parseDouble(req.getParameter("mensualite"));
                 this.client= new Client();
-                s= new Simulation(montant,taux,duree,mensualite);
+                s= new Simulation(montant,taux,duree);
+                s.setMensualite();
                 client= new Client();
                 client.setCode(req.getParameter("code"));
                 DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
-                service.add(demandeCredit);
+                service.add(demandeCredit).ifPresent(d->{
+                    Gson gson = new GsonBuilder().create();
+                    resp.setContentType("application/json");
+                    resp.setCharacterEncoding("UTF-8");
+                    try {
+                        resp.getWriter().write(gson.toJson("added"));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case "/change-status-demande":
                 int demandeNum = Integer.parseInt(req.getParameter("demandeNum"));
