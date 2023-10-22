@@ -149,7 +149,7 @@
                     window.location.href = "/credit-display";
                 },
                 error: function (error) {
-                    console.log("3yaaan");
+                    console.log("3yaan");
                 }
             });
         });
