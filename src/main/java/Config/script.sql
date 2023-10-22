@@ -40,7 +40,7 @@ CREATE TABLE agence (
 
 
 
-CREATE TABLE historique_modifications_demande (
+CREATE TABLE historique (
                        id SERIAL PRIMARY KEY,
                        demande_id INT,
                        ancien_statut VARCHAR(255),
@@ -58,7 +58,7 @@ CREATE OR REPLACE FUNCTION enregistrer_historique_modification()
 RETURNS TRIGGER AS $$
 BEGIN
 
-INSERT INTO historique_modifications_demande (demande_id, ancien_statut, nouveau_statut)
+INSERT INTO historique (demande_id, ancien_statut, nouveau_statut)
 VALUES (OLD.number, OLD.etat, NEW.etat);
 RETURN NEW;
 END;

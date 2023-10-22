@@ -13,4 +13,5 @@ public interface IdemandeCredit extends IData<DemandeCredit,Integer>{
     List<DemandeCredit> getbyetat(String etat);
     List<DemandeCredit> gatAll();
     Optional<DemandeCredit> updateStatus(int demandeNum, String newStatus);
+
 }

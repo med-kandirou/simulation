@@ -81,10 +81,6 @@ public class ImpDemandeCredit implements IdemandeCredit {
 
 
 
-
-
-
-
     @Override
     public boolean delete(Integer id) {
 
