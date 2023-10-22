@@ -1,10 +1,12 @@
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>-->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/credit_simulation</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/credit_simulation</property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">kamal123</property>
-        <maping class="DTO.Client"></maping>
+        <property name="hibernate.connection.password">simokandirou1234@</property>
+        <mapping class="DTO.Client" />
+        <mapping class="DTO.DemandeCredit" />
+        <mapping class="DTO.Agence" />
     </session-factory>
 </hibernate-configuration>

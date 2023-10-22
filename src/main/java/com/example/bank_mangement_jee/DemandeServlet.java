@@ -1,5 +1,6 @@
 package com.example.bank_mangement_jee;
 
+import Config.LocalDateAdapter;
 import DAO.ImpDemandeCredit;
 import DAO.ImpEmploye;
 import DTO.Client;
@@ -7,6 +8,8 @@ import DTO.DemandeCredit;
 import DTO.Simulation;
 import Services.DemandeService;
 import Services.EmployeService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,19 +21,18 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 
-@WebServlet(name ="DemandeServlet", urlPatterns = {"/demande-create","/demande-display"})
+@WebServlet(name ="DemandeServlet", urlPatterns = {"/credit-display","/credit-display-etat","/credit-display-date","/demande-create","/demande-display","/simulation-display"})
 public class DemandeServlet extends HttpServlet {
     DemandeService service;
     String requestURL;
     //demande
     private Simulation s;
     private String remarks;
-    private int duree;
     private Client client;
     //simulation
     private double taux;
     private double montant;
-    private int dure;
+    private int duree;
     private double mensualite;
 
     @Override
@@ -40,7 +42,26 @@ public class DemandeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        this.requestURL=req.getServletPath();
+        switch (this.requestURL){
+            case "/credit-display" :
+                req.setAttribute("credits",service.getAll());
+                req.getRequestDispatcher("Credit/demande.jsp").forward(req, resp);
+                break;
+            case "/credit-display-etat" :
+                req.setAttribute("credits",service.getbyetat(req.getParameter("etat")));
+                req.getRequestDispatcher("Credit/demande.jsp").forward(req, resp);
+                break;
+            case "/credit-display-date" :
+                req.setAttribute("credits",service.getbydate(LocalDate.parse(req.getParameter("date"))));
+                req.getRequestDispatcher("Credit/demande.jsp").forward(req, resp);
+                break;
+            case "/simulation-display" :
+                req.getRequestDispatcher("Credit/simulation.jsp").forward(req, resp);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -48,7 +69,13 @@ public class DemandeServlet extends HttpServlet {
         this.requestURL=req.getServletPath();
         switch (this.requestURL){
             case "/demande-create":
-                s= new Simulation(montant,taux,dure,mensualite);
+                this.taux= Double.parseDouble(req.getParameter("taux"));
+                this.montant= Double.parseDouble(req.getParameter("montant"));
+                this.duree= Integer.parseInt(req.getParameter("dure"));
+                this.remarks= req.getParameter("remarks");
+                this.mensualite= Double.parseDouble(req.getParameter("mensualite"));
+                this.client= new Client();
+                s= new Simulation(montant,taux,duree,mensualite);
                 client= new Client();
                 client.setCode(req.getParameter("code"));
                 DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
@@ -58,7 +85,5 @@ public class DemandeServlet extends HttpServlet {
                 break;
         }
     }
-
-
 
 }

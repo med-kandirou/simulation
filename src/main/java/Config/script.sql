@@ -19,14 +19,16 @@ CREATE TABLE employe (
 
 
 CREATE TABLE demandecredit (
-                               number serial primary key ,
-                               date DATE default current_date,
-                               etat VARCHAR(255),
-                               montant float,
-                               duree INT,
-                               remarks VARCHAR(255),
-                               Client_code varchar(50),
-                               FOREIGN KEY (Client_code) REFERENCES client(code)
+                               number serial PRIMARY KEY,
+                               etat VARCHAR(255) CHECK (etat IN ('encours', 'accepte', 'refuse')) DEFAULT 'encours',
+                               taux REAL,
+                               montant REAL,
+                               mensualite REAL,
+                               dure INT,
+                               remarks TEXT,
+                               date DATE DEFAULT current_date,
+                               Client_code VARCHAR(50),
+                               FOREIGN KEY (Client_code) REFERENCES client (code)
 );
 
 CREATE TABLE agence (
@@ -35,4 +37,6 @@ CREATE TABLE agence (
                         adresse VARCHAR(255),
                         phone VARCHAR(20)
 );
+
+
 

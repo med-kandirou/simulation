@@ -7,7 +7,9 @@ import DTO.DemandeCredit;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import Enum.EtatCredit;
 
 public class DemandeService {
 
@@ -26,10 +28,18 @@ public class DemandeService {
     }
 
     public List<DemandeCredit> getbyetat(String etat){
+        /*EtatCredit etatCredit;
+        if(Objects.equals(etat, "encours")){
+            etatCredit=EtatCredit.encours;
+        } else if (Objects.equals(etat, "accepte")) {
+            etatCredit=EtatCredit.accepte;
+        }else{
+            etatCredit=EtatCredit.refuse;
+        }*/
         return impdemande.getbyetat(etat);
     }
 
-    public List<DemandeCredit> gatAll(){
+    public List<DemandeCredit> getAll(){
         return impdemande.gatAll();
     }
 }

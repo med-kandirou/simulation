@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class DemandeCredit {
      @Id
      private int number;
-     private EtatCredit etat;
+     private String etat;
      @NonNull private double taux;
      @NonNull private double montant;
      @NonNull private double mensualite;

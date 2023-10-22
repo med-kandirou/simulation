@@ -82,6 +82,7 @@ $(document).ready(function () {
                 birthday : $("#birthday").val(),
                 adresse : $("#adresse").val(),
                 phone : $("#phone").val(),
+                remarks : $("#remarks").val(),
                 taux:localStorage.getItem('taux'),
                 montant:localStorage.getItem('montant'),
                 dure:localStorage.getItem('dure'),
@@ -96,4 +97,9 @@ $(document).ready(function () {
             }
         });
     });
+
+    // search by date
+    $('#search_date').on('change',function (){
+        window.location.href="/credit-display-date?date="+$('#search_date').val()+"";
+    })
 });
