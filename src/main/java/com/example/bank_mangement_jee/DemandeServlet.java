@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 
@@ -75,11 +76,14 @@ public class DemandeServlet extends HttpServlet {
                 this.remarks= req.getParameter("remarks");
                 this.mensualite= Double.parseDouble(req.getParameter("mensualite"));
                 this.client= new Client();
-                s= new Simulation(montant,taux,duree,mensualite);
+                s= new Simulation(montant,taux,duree);
+                s.setMensualite();
                 client= new Client();
                 client.setCode(req.getParameter("code"));
                 DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
-                service.add(demandeCredit);
+                service.add(demandeCredit).ifPresent(d->{
+                    System.out.printf("added");
+                });
                 break;
             default:
                 break;

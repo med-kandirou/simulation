@@ -1,10 +1,11 @@
 //calcule prix
 function calcule(){
-    let tauxMensuel = (7 / 12) / 100;
-    let montant= document.getElementById('montant').value;
-    let dure= document.getElementById('dure').value;
+    let taux = 5.5;
+    let montant = document.getElementById('montant').value;
+    let dure = document.getElementById('dure').value;
+    let tauxMensuel = taux / (12 * 100);
     let mensualite = (montant * tauxMensuel) / (1 - Math.pow(1 + tauxMensuel, -dure));
-    localStorage.setItem('taux', tauxMensuel);
+    localStorage.setItem('taux', taux);
     localStorage.setItem('montant', montant);
     localStorage.setItem('dure', dure);
     localStorage.setItem('mensualite', mensualite);
@@ -56,6 +57,7 @@ $(document).ready(function () {
             data: { find : clienId },
 
             success: function (data) {
+                $("#code").val(data.code);
                 $("#fname").val(data.firstName);
                 $("#lname").val(data.lastName);
                 $("#birthday").val(data.birthday);
