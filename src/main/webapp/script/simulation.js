@@ -88,7 +88,9 @@ $(document).ready(function () {
                 mensualite:localStorage.getItem('mensualite')
             },
             success: function (data) {
-                console.log(data);
+                if(data=='added'){
+                    window.location.href = "/simulation-display";
+                }
             },
             error: function (error) {
                 //window.location.href = "/client-create";

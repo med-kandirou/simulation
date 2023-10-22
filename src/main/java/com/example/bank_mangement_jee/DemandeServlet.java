@@ -82,7 +82,14 @@ public class DemandeServlet extends HttpServlet {
                 client.setCode(req.getParameter("code"));
                 DemandeCredit demandeCredit= new DemandeCredit(s.getTaux(),s.getMontant(),s.getMensualite(),s.getDure(),remarks,client);
                 service.add(demandeCredit).ifPresent(d->{
-                    System.out.printf("added");
+                    Gson gson = new GsonBuilder().create();
+                    resp.setContentType("application/json");
+                    resp.setCharacterEncoding("UTF-8");
+                    try {
+                        resp.getWriter().write(gson.toJson("added"));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
                 break;
             default:
