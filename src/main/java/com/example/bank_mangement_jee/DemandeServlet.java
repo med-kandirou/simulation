@@ -45,7 +45,7 @@ public class DemandeServlet extends HttpServlet {
         this.requestURL=req.getServletPath();
         switch (this.requestURL){
             case "/credit-display" :
-                //req.setAttribute("credits",service.getAll());
+                req.setAttribute("credits",service.getAll());
                 req.getRequestDispatcher("Credit/demande.jsp").forward(req, resp);
                 break;
             case "/credit-display-etat" :

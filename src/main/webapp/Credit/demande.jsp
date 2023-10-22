@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: YC
@@ -28,7 +29,7 @@
             <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
                     <li>
-                        <a href="/credit-display-etat?etat=encrous" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">En cours</a>
+                        <a href="/credit-display-etat?etat=encours" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">En cours</a>
                     </li>
                     <li>
                         <a href="/credit-display-etat?etat=accepte" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Accepte</a>
@@ -48,62 +49,78 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
             <th scope="col" class="px-6 py-3">
-                Name
+                Number Client
             </th>
             <th scope="col" class="px-6 py-3">
-                Position
+                Montant
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Taux
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Mensualité
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Dure
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Reamrks
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Date
             </th>
             <th scope="col" class="px-6 py-3">
                 Status
             </th>
             <th scope="col" class="px-6 py-3">
-                Action
+                change status
             </th>
         </tr>
         </thead>
         <tbody>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="pl-3">
-                    <div class="text-base font-semibold">Neil Sims</div>
-                    <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                </div>
-            </th>
-            <td class="px-6 py-4">
-                React Developer
-            </td>
-            <td class="px-6 py-4">
-                <div class="flex items-center">
-                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
-                </div>
-            </td>
-            <td class="px-6 py-4">
-                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-            </td>
-        </tr>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="pl-3">
-                    <div class="text-base font-semibold">Bonnie Green</div>
-                    <div class="font-normal text-gray-500">bonnie@flowbite.com</div>
-                </div>
-            </th>
-            <td class="px-6 py-4">
-                Designer
-            </td>
-            <td class="px-6 py-4">
-                <div class="flex items-center">
-                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
-                </div>
-            </td>
-            <td class="px-6 py-4">
-                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-            </td>
-        </tr>
+        <c:forEach items="${credits}" var="credit">
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                        ${credit.client.code}
+                </th>
+                <td class="px-6 py-4">
+                        ${credit.montant}
+                </td>
+                <td class="px-6 py-4">
+                        ${credit.taux}
+                </td>
+                <td class="px-6 py-4">
+                        ${credit.mensualite}
+                </td>
+                <td class="px-6 py-4">
+                        ${credit.dure}
+                </td>
+                <td class="px-6 py-4">
+                        ${credit.remarks}
+                </td>
+                <td class="px-6 py-4">
+                        ${credit.date}
+                </td>
+                <td class="px-6 py-4">
+                        ${credit.etat}
+                </td>
+                <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">change status</a>
+                </td>
+            </tr>
+        </c:forEach>
+
         </tbody>
     </table>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#search_date').on('change', function() {
+            var selectedDate = $('#search_date').val();
+            window.location.href = "/credit-display-date?date=" + selectedDate;
+        });
+    </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 </body>
 </html>

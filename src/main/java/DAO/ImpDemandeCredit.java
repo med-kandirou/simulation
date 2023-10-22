@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import Enum.EtatCredit;
 
 public class ImpDemandeCredit implements IdemandeCredit {
    private SessionFactory sessionFactory;
@@ -36,23 +37,24 @@ public class ImpDemandeCredit implements IdemandeCredit {
         }
     }
 
-    @Override
     public List<DemandeCredit> getbydate(LocalDate date) {
-        Query query = session.createQuery("FROM demandecredit WHERE date like :date");
+        Query query = session.createQuery("FROM DemandeCredit d WHERE d.date = :date", DemandeCredit.class);
         query.setParameter("date", date);
         return query.list();
     }
 
     @Override
     public List<DemandeCredit> getbyetat(String etat) {
-        Query query = session.createQuery("FROM demandecredit WHERE etat like :etat");
-        query.setParameter("etat", etat);
+        Query query = session.createQuery("FROM DemandeCredit d WHERE d.etat = :etat", DemandeCredit.class);
+        query.setParameter("etat",etat);
         return query.list();
     }
 
+
+
     @Override
     public List<DemandeCredit> gatAll() {
-        Query query = session.createQuery("FROM demandecredit");
+        Query query = session.createQuery("FROM DemandeCredit ",DemandeCredit.class);
         return query.list();
     }
 
