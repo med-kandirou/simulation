@@ -2,6 +2,7 @@ package DAO;
 
 import Config.SessionFactoryProvider;
 import DTO.DemandeCredit;
+import DTO.Historique;
 import Interfaces.IdemandeCredit;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -79,10 +80,12 @@ public class ImpDemandeCredit implements IdemandeCredit {
         }
     }
 
-
-
-
-
+    @Override
+    public List<Historique> getHistorique(int numDemande) {
+        Query query = session.createQuery("FROM Historique h WHERE h.demande_id = :demande_id", Historique.class);
+        query.setParameter("demande_id",numDemande);
+        return query.list();
+    }
 
 
     @Override

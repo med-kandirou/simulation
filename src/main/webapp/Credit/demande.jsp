@@ -76,6 +76,9 @@
             <th scope="col" class="px-6 py-3">
                 change status
             </th>
+            <th scope="col" class="px-6 py-3">
+                Historiques
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -118,6 +121,9 @@
                             <i  data-demande-num="${credit.number}" class="fa-solid fa-square-check text-3xl valider" style="color: #59ff00;"></i>
                         </c:when>
                     </c:choose>
+                </td>
+                <td>
+                   <a href="/historique?demandeId=${credit.number}"> Historiques</a>
                 </td>
             </tr>
         </c:forEach>
