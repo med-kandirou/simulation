@@ -9,6 +9,5 @@
         <mapping class="DTO.DemandeCredit" />
         <mapping class="DTO.Agence" />
         <mapping class="DTO.Historique" />
-
     </session-factory>
 </hibernate-configuration>

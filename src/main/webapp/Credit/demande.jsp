@@ -76,6 +76,9 @@
             <th scope="col" class="px-6 py-3">
                 change status
             </th>
+            <th scope="col" class="px-6 py-3">
+                Historiques
+            </th>
         </tr>
         </thead>
         <tbody>

@@ -78,7 +78,7 @@ public class DemandeServlet extends HttpServlet {
         switch (this.requestURL){
             case "/demande-create":
                 this.taux= Double.parseDouble(req.getParameter("taux"));
-                this.montant= Double.parseDouble(req.getParameter("montant"));
+                this.montant = Double.parseDouble(req.getParameter("montant").replace(",", "."));
                 this.duree= Integer.parseInt(req.getParameter("dure"));
                 this.remarks= req.getParameter("remarks");
                 this.mensualite= Double.parseDouble(req.getParameter("mensualite"));
