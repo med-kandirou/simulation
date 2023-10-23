@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import DTO.Historique;
 import Enum.EtatCredit;
 
 public class DemandeService {
@@ -47,4 +49,7 @@ public class DemandeService {
         return impdemande.updateStatus(demandeNum,newStatus );
     }
 
+    public List<Historique> getHistorique(int numDemande){
+        return impdemande.getHistorique(numDemande);
+    }
 }

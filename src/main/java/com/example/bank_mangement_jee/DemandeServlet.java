@@ -5,6 +5,7 @@ import DAO.ImpDemandeCredit;
 import DAO.ImpEmploye;
 import DTO.Client;
 import DTO.DemandeCredit;
+import DTO.Historique;
 import DTO.Simulation;
 import Services.DemandeService;
 import Services.EmployeService;
@@ -20,10 +21,11 @@ import lombok.NonNull;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 
-@WebServlet(name ="DemandeServlet", urlPatterns = {"/credit-display","/credit-display-etat","/credit-display-date","/demande-create","/demande-display","/simulation-display", "/change-status-demande"})
+@WebServlet(name ="DemandeServlet", urlPatterns = {"/credit-display","/credit-display-etat","/credit-display-date","/demande-create","/demande-display","/simulation-display", "/change-status-demande", "/historique"})
 public class DemandeServlet extends HttpServlet {
     DemandeService service;
     String requestURL;
@@ -60,6 +62,10 @@ public class DemandeServlet extends HttpServlet {
                 break;
             case "/simulation-display" :
                 req.getRequestDispatcher("Credit/simulation.jsp").forward(req, resp);
+                break;
+            case "/historique" :
+                req.setAttribute("historiques",service.getHistorique(Integer.parseInt(req.getParameter("demandeId"))));
+                req.getRequestDispatcher("Credit/historique.jsp").forward(req, resp);
                 break;
             default:
                 break;

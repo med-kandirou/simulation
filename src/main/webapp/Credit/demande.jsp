@@ -119,6 +119,9 @@
                         </c:when>
                     </c:choose>
                 </td>
+                <td>
+                   <a href="/historique?demandeId=${credit.number}"> Historiques</a>
+                </td>
             </tr>
         </c:forEach>
 
