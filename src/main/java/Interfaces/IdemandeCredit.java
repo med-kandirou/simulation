@@ -12,7 +12,7 @@ import Enum.EtatCredit;
 public interface IdemandeCredit extends IData<DemandeCredit,Integer>{
     List<DemandeCredit> getbydate(LocalDate date);
     List<DemandeCredit> getbyetat(String etat);
-    List<DemandeCredit> gatAll();
+    List<DemandeCredit> getAll();
     Optional<DemandeCredit> updateStatus(int demandeNum, String newStatus);
 
     List<Historique> getHistorique(int numDemande);

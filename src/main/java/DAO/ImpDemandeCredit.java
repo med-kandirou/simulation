@@ -57,7 +57,7 @@ public class ImpDemandeCredit implements IdemandeCredit {
 
 
     @Override
-    public List<DemandeCredit> gatAll() {
+    public List<DemandeCredit> getAll() {
         Query query = session.createQuery("FROM DemandeCredit ",DemandeCredit.class);
         return query.list();
     }
