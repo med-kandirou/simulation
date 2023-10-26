@@ -30,14 +30,6 @@ public class DemandeService {
     }
 
     public List<DemandeCredit> getbyetat(String etat){
-        /*EtatCredit etatCredit;
-        if(Objects.equals(etat, "encours")){
-            etatCredit=EtatCredit.encours;
-        } else if (Objects.equals(etat, "accepte")) {
-            etatCredit=EtatCredit.accepte;
-        }else{
-            etatCredit=EtatCredit.refuse;
-        }*/
         return impdemande.getbyetat(etat);
     }
 
